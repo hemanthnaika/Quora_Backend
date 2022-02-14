@@ -19,11 +19,24 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    role: {
-        type: Number,
-        default: 0
-    }
-})
+    followers:[{
+        type:mongoose.Types.ObjectId,
+        ref:"followers"
+    }],
+    question:[{
+        type:mongoose.Types.ObjectId,
+        ref:"question"
+    }],
+    answers:[{
+        type:mongoose.Types.ObjectId,
+        ref:"answers"
+    }],
+    role:[ {
+       
+         type: Number,
+         default: 0
+    }]
+}) 
 
 const User = mongoose.model("User", UserSchema)
 

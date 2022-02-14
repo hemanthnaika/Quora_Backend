@@ -5,9 +5,9 @@ import connectDB from './services/mongodb/connectDB'
 dotenv.config()
 import cors from 'cors'
 import authRoutes from './routes/authRoutes'
-import categoryRoutes from './routes/categoryRoutes'
-import productRoutes from './routes/productRoutes'
-
+import questionRoutes from './routes/question'
+import answersRoutes from './routes/answers'
+process.env.JWT_KEY
 
 const app = express()
 const port = process.env.PORT || 3003
@@ -19,8 +19,8 @@ app.use(express.json())
 
 //route to handle auth requests
 app.use("/api/v1/auth", authRoutes)
-app.use("/api/v1/category", categoryRoutes)
-app.use("/api/v1/product", productRoutes)
+app.use("/api/v1/question", questionRoutes)
+app.use("/api/v1/answers", answersRoutes)
 
 app.get('/', (req, res) => {
     res.send(`Server running at ${port} 13 Dec`)

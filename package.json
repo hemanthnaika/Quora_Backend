@@ -5,10 +5,11 @@
     "main": "index.js",
     "scripts": {
         "dev": "nodemon  --exec ./node_modules/.bin/babel-node src/",
-        "build": "babel src --out-dir dist"
+        "build": "babel src --out-dir dist",
+        "start": "npm install && npm run build && node dist/index.js"
     },
     "author": "Hemanth",
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "@babel/cli": "^7.17.0",
         "@babel/core": "^7.17.2",

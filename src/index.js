@@ -23,7 +23,7 @@ app.use("/api/v1/question", questionRoutes)
 app.use("/api/v1/answers", answersRoutes)
 
 app.get('/', (req, res) => {
-    res.send(`Server running at ${port} 13 Dec`)
+    res.send(`Server running at ${port}`)
 })
 
 app.listen(port, (req, res) => {

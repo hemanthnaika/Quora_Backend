@@ -25,7 +25,7 @@ app.use("/api/v1/answers", answersRoutes)
 app.get('/', (req, res) => {
     res.send(`Server running at ${port}`)
 })
-
+console.log('hi')
 app.listen(port, (req, res) => {
     console.log(`Server listening at PORT ${port}`)
 })

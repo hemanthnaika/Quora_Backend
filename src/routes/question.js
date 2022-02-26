@@ -33,7 +33,7 @@ params : none
 */
 
 router.post('/add',
-     body('content').isString({min:5}),
+    //  body('content').isString({min:5}),
     body('question').isLength({ min: 5}),
     //body('description').isLength({ min: 10 }),
      async (req, res) => {

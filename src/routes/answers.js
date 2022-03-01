@@ -10,31 +10,14 @@ const router = express.Router()
 type : GET
 path : /api/v1/answers/all
 params : none
-isProtected: false (public)
-*/
-
-router.get('/all', async (req, res) => {
-    try {
-        const answers = await Answers.find({})
-        return res.status(200).json({ answers, message: "Successfully fetched answers" })
-    } catch (error) {
-        console.log(error.message)
-        return res.status(500).json({ answers: [], message: "error fetching answer" })
-    }
-})
-
-/*
-type : GET
-path : /api/v1/answers/all
-params : none
 query:QuestionId
 
 */
 
 router.get('/all', async (req, res) => {
     try {
-        const { QuestionId } = req.query
-        const answers = await Answers.find({ Question: QuestionId })
+        const { questionId } = req.query
+        const answers = await Answers.find({})
         return res.status(200).json({ answers, message: "Successfully fetched answers" })
     } catch (error) {
         console.log(error.message)
@@ -46,43 +29,39 @@ router.get('/all', async (req, res) => {
 
 /*
 type : POST
-path : /api/v1/answers/id
+path : /api/v1/answers/add
 params : none
 
 */
 
 router.post('/add',
-body('question').isLength({ min: 5 }),
-body('answers').isLength({min:2}),
-body('content').isLength({min:5}),
-    // body('imageUrl').isURL(),
-    async (req, res) => {
+    body('id'),
+    body('content').isLength({min:5}),
+    body('question').isLength({ min: 5}),
+    body('Answers').isLength({min:5}),
+    //body('description').isLength({ min: 10 }),
+     async (req, res) => {
 
         const { errors } = validationResult(req)
-        if (errors.length > 0) return res.status(403).json({ errors, message: "Bad request, validation failed" })
+        if (errors.length > 0) return res.status(403).json({ errors, message: "Bad request" })
 
         try {
-            // check if the category is valid/exists
-            const question = await Question.findById(req.body.question)
-            if (!question) return res.status(300).json({
-                answers: null,
-                message: "Invalid question"
-            })
+            const answer = new Answers(req.body);
+            await answer.save()
 
-            const answers = new Answers(req.body);
-            await answers.save()
             res.status(200).json({
-                answers, message: "Saved answers in DB"
+              
+                answer, message: "Saved Answers in DB"
             })
-            console.log(answers)
+           
         } catch (error) {
             return res.status(500).json({
-                answers: null,
-                message: "Unable to save answers in DB"
+            answer: null,
+                message: "Unable to save question in DB"
             })
         }
+     
     })
-
 
 
 /*

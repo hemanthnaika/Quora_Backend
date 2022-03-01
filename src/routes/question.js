@@ -17,11 +17,11 @@ isProtected: false (public)
 
 router.get('/all', async (req, res) => {
     try {
-        const question = await Question.find({})
-        return res.status(200).json({ question, message: "Successfully fetched question" })
+        const questions = await Question.find({})
+        return res.status(200).json({ questions, message: "Successfully fetched question" })
     } catch (error) {
         console.log(error.message)
-        return res.status(500).json({ question: [], message: "Error fetching " })
+        return res.status(500).json({ questions: [], message: "Error fetching " })
     }
 })
 
@@ -33,26 +33,26 @@ params : none
 */
 
 router.post('/add',
-    //  body('content').isString({min:5}),
+     
     body('question').isLength({ min: 5}),
-    //body('description').isLength({ min: 10 }),
+    
      async (req, res) => {
 
         const { errors } = validationResult(req)
         if (errors.length > 0) return res.status(403).json({ errors, message: "Bad request" })
 
         try {
-            const question = new Question(req.body);
-            await question.save()
-          
+            const questions = new Question(req.body);
+            await questions.save()
+
             res.status(200).json({
               
-                question, message: "Saved question in DB"
+                questions, message: "Saved question in DB"
             })
-            console.log(question)
+           
         } catch (error) {
             return res.status(500).json({
-                question: null,
+                questions: null,
                 message: "Unable to save question in DB"
             })
         }

@@ -4,27 +4,26 @@ const AnswersSchema = new mongoose.Schema({
     content:{
              type:String
     },
-    Question:{
-        type:String,
-        type:mongoose.Types.ObjectId,
-        ref:"question"
+    question:{
+        type:String 
     },
-    Answers:[{
-        type:String
-    }],
+    Answers:{
+        type:String,
+    },
     User:{
         type:mongoose.Types.ObjectId,
         ref:"User"
     },
-    likes:{
+    likes:[{
         type:Number
-    },
+    }],
     isAnonymous:{
      type:Boolean
  },
  date: {
       type: Date, 
-      default: Date.now }
+      default: Date.now 
+      }
 })
 
 const Answers = mongoose.model('Answers', AnswersSchema)

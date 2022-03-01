@@ -5,21 +5,24 @@ const QuestionSchema = new mongoose.Schema({
     content:{
              type:String
     },
+    imageUrl: {
+        type: String,
+        
+     },
+    question:{
+        type:String
+    },
     Answers:[{
         type:String,
-        type:mongoose.Types.ObjectId, 
-        ref:"Answers"
+        
     }],
     User:{
         type:mongoose.Types.ObjectId,
         ref:"User"
     },
-    Question:[{
-        type:String
-    }],
-    likes:{
+    likes:[{
         type:Number
-    },
+    }],
  isAnonymous:{
      type:Boolean
  },
@@ -31,6 +34,6 @@ const QuestionSchema = new mongoose.Schema({
 })
 
 
-const Question = mongoose.model("Question",QuestionSchema )
+const Question = mongoose.model('Question',QuestionSchema )
 
 export default Question

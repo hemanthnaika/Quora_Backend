@@ -1,16 +1,18 @@
 import mongoose from 'mongoose'
 
 const AnswersSchema = new mongoose.Schema({
-    content:{
-             type:String
-    },
-    question:{
-        type:String 
-    },
-    Answers:{
+    AContent:{
         type:String,
     },
-    User:{
+    
+    question:{
+      type:mongoose.Types.ObjectId,
+      ref:"question"
+    },
+    imageUrl: {
+        type: String,   
+     },
+     Users:{
         type:mongoose.Types.ObjectId,
         ref:"User"
     },
@@ -26,6 +28,6 @@ const AnswersSchema = new mongoose.Schema({
       }
 })
 
-const Answers = mongoose.model('Answers', AnswersSchema)
+const Answers = mongoose.model("Answers", AnswersSchema)
 
 export default Answers

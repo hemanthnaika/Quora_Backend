@@ -2,21 +2,19 @@ import mongoose from 'mongoose'
 
 
 const QuestionSchema = new mongoose.Schema({
-    content:{
-             type:String
+    questionContent:{
+             type:String,
     },
     imageUrl: {
         type: String,
         
      },
-    question:{
-        type:String
-    },
-    Answers:[{
-        type:String,
+    answers:{
+        type:mongoose.Types.ObjectId,
+        ref:"Answers"
         
-    }],
-    User:{
+    },
+    Users:{
         type:mongoose.Types.ObjectId,
         ref:"User"
     },
@@ -34,6 +32,6 @@ const QuestionSchema = new mongoose.Schema({
 })
 
 
-const Question = mongoose.model('Question',QuestionSchema )
+const Question = mongoose.model("Question",QuestionSchema )
 
 export default Question

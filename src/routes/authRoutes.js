@@ -7,17 +7,11 @@ import jwt from 'jsonwebtoken'
 import isAdmin from '../middlewares/isAdmin'
 import { body, validationResult } from 'express-validator'
 
-/*
-type : GET
-path : /api/v1/auth/users
-params : none
-isProtected: true (admin)
-*/
 
-router.get('/users', isAdmin, async (req, res) => {
+router.get('/users',async (req, res) => {
     try {
         const users = await User.find({})
-        res.json({ users })
+        res.status(200).json({users,message:"Successfully fetched Users"})
     } catch (error) {
         console.log(error.message)
         res.status(500).json({ users: [] })
